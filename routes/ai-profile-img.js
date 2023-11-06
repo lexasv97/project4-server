@@ -1,6 +1,5 @@
 var express = require('express');
 const User = require('../models/User');
-const Creator = require('../models/Creator');
 var router = express.Router();
 // api key goes to .env
 

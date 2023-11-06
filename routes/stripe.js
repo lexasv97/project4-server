@@ -4,7 +4,7 @@ const Lesson = require('../models/Lesson');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); 
 const {isUserLoggedIn} = require('../middleware/user-route-guard');
 
-router.get('/:lessonId', isUserLoggedIn, async (req, res, next) => {
+router.get('/:lessonId', async (req, res, next) => { // isUserLoggedIn
     const lessonId = req.params.lessonId;
 
     try {

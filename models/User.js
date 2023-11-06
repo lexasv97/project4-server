@@ -4,8 +4,9 @@ const userSchema = new Schema(
     {
       email: String,
       password: String,
-      fullName: String,
+      name: String,
       occupation: String,
+      isBusiness: {type: Boolean, default: false},
       profileImage: {
         type: String,
         default: '/images/blankProfile.png'

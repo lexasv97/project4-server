@@ -6,7 +6,7 @@ const Lesson = require('../models/Lesson')
 
 const { isUserLoggedIn } = require('../middleware/user-route-guard');
 
-router.post('/new/:lessonId', isUserLoggedIn, (req, res, next) => {  
+router.post('/new/:lessonId', (req, res, next) => {  // isUserLoggedIn
     console.log("REQ.BODY ====>", req.body) 
     console.log("LESSON ID ====> ", req.params.lessonId)   
 

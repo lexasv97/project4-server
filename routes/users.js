@@ -32,11 +32,6 @@ router.get('/user-profile', isUserLoggedIn, (req, res, next) => {
     
 });
 
-router.get('/update-user-profile', isUserLoggedIn, (req, res, next) => {
-
-    res.render('user-auth/update-user-profile.hbs', req.session.user)
-})
-
 router.post('/update-user-profile', isUserLoggedIn, (req, res, next) => {
 
     const { fullName, email, password } = req.body;

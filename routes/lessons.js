@@ -5,8 +5,6 @@ const Lesson = require('../models/Lesson');
 
 const User = require('../models/User');
 
-const Creator = require('../models/Creator')
-
 const {isCreatorLoggedIn} = require('../middleware/creator-route-guard')
 
 const isCreatorOwner = require('../middleware/isCreatorOwner')
@@ -29,13 +27,13 @@ router.get('/all', (req,res,next) => {
     })
 })
 
-router.get('/new', isCreatorLoggedIn, (req, res, next) => {
+router.get('/new', (req, res, next) => { // isCreatorLoggedIn
 
     res.render('lessons/new-lesson.hbs')
     
 })
 
-router.post('/new', isCreatorLoggedIn, (req,res,next) => {
+router.post('/new', (req,res,next) => { // isCreatorLoggedIn
 
     const { name, description, imageUrl, price, type, format } = req.body
 
@@ -88,7 +86,7 @@ router.get('/details/:lessonId', (req,res,next) => {
     })
 })
 
-router.get('/edit/:lessonId', isCreatorLoggedIn, isCreatorOwner, (req,res,next) => {
+router.get('/edit/:lessonId', (req,res,next) => { // isCreatorLoggedIn, isCreatorOwner,
 
     Lesson.findById(req.params.lessonId)
     .then((lesson) => {
@@ -101,7 +99,7 @@ router.get('/edit/:lessonId', isCreatorLoggedIn, isCreatorOwner, (req,res,next) 
 
 })
 
-router.post('/edit/:lessonId', isCreatorLoggedIn, isCreatorOwner, (req,res,next) => {
+router.post('/edit/:lessonId', (req,res,next) => { // isCreatorLoggedIn, isCreatorOwner
 
     Lesson.findByIdAndUpdate(
         req.params.lessonId,
@@ -117,7 +115,7 @@ router.post('/edit/:lessonId', isCreatorLoggedIn, isCreatorOwner, (req,res,next)
     })
 })
 
-router.get('/delete/:lessonId', isCreatorLoggedIn, isCreatorOwner, (req,res,next) => {
+router.get('/delete/:lessonId', (req,res,next) => { // isCreatorLoggedIn, isCreatorOwner
 
     Lesson.findByIdAndRemove(req.params.lessonId)
     .then((deletedLesson) => {
@@ -158,7 +156,7 @@ router.get('/results', (req, res, next) => {
     })
 })
 
-router.get('/payment-confirmation/:lessonId', isUserLoggedIn, (req,res,next) => {
+router.get('/payment-confirmation/:lessonId', (req,res,next) => { // isUserLoggedIn
     const lessonId = req.params.lessonId;
     User.findByIdAndUpdate(
         req.session.user._id,

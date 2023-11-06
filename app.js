@@ -13,28 +13,20 @@ var session = require('express-session')
 var MongoStore = require('connect-mongo')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/user');
-var creatorAuthRouter = require('./routes/creators-auth')
+var usersRouter = require('./routes/users');
 var lessonsRouter = require('./routes/lessons')
-var creatorRouter = require('./routes/creators')
 var reviewsRouter = require('./routes/reviews')
-
-var userAuthRouter = require('./routes/user-auth')
+var authRouter = require('./routes/auth')
 var aiImageRouter = require('./routes/ai-profile-img')
 var selectRouter = require('./routes/select-image')
-
-
 var stripeRouter = require('./routes/stripe');
 const Lesson = require('./models/Lesson');
-
-
-var dynamicNav = require('./middleware/dynamicNav');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'hbs');
 
 app.set('trust proxy', 1);
 app.enable('trust proxy');
@@ -87,19 +79,14 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/', dynamicNav, indexRouter);
-app.use('/user', usersRouter);
-app.use('/creator-auth', creatorAuthRouter)
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 app.use('/lessons', lessonsRouter)
-app.use('/creators', creatorRouter)
 app.use('/reviews', reviewsRouter);
-app.use('/user-auth', userAuthRouter);
-
+app.use('/auth', authRouter);
 app.use('/ai-profile-img', aiImageRouter)
 app.use('/select-image', selectRouter)
-
 app.use('/stripe', stripeRouter)
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
