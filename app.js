@@ -11,6 +11,7 @@ const DOMAIN = 'http://localhost:3000';
 var mongoose = require('mongoose')
 var session = require('express-session')
 var MongoStore = require('connect-mongo')
+var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -58,6 +59,16 @@ app.use(
     })
   })
 );
+
+app.use(
+  cors({
+    origin: [process.env.REACT_APP_URI]  // <== URL of our future React app
+  })
+);
+
+// app.use(
+//     cors()
+//   );
 
 app.use(logger('dev'));
 app.use(express.json());
