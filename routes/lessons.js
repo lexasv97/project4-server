@@ -27,12 +27,6 @@ router.get('/all', (req,res,next) => {
     })
 })
 
-router.get('/new', (req, res, next) => { // isCreatorLoggedIn
-
-    res.render('lessons/new-lesson.hbs')
-    
-})
-
 router.post('/new', (req,res,next) => { // isCreatorLoggedIn
 
     const { name, description, imageUrl, price, type, format } = req.body
