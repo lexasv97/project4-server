@@ -1,7 +1,6 @@
 var express = require('express');
 const User = require('../models/User');
 var router = express.Router();
-// api key goes to .env
 
 const { isCreatorLoggedIn } = require('../middleware/creator-route-guard');
 const {isUserLoggedIn} = require('../middleware/user-route-guard')
